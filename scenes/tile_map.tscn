@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cmhcxhb6i381n" path="res://scripts/hover_layer.gd" id="4_f6fy2"]
 [ext_resource type="Script" uid="uid://k1rjdhq2h5ya" path="res://scripts/number_layer.gd" id="5_kvphj"]
 [ext_resource type="Script" uid="uid://cs8bdg6sui78e" path="res://scenes/grass_layer.gd" id="6_kvphj"]
+[ext_resource type="Script" uid="uid://bhu14qj6yc6s8" path="res://scenes/flag_layer.gd" id="7_5ie0g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dohrl"]
 texture = ExtResource("1_47enk")
@@ -31,30 +32,6 @@ texture_region_size = Vector2i(50, 50)
 [sub_resource type="TileSet" id="TileSet_f6fy2"]
 tile_size = Vector2i(50, 50)
 sources/0 = SubResource("TileSetAtlasSource_dohrl")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6fy2"]
-texture = ExtResource("1_47enk")
-texture_region_size = Vector2i(50, 50)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-7:1/0 = 0
-7:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_kvphj"]
-tile_size = Vector2i(50, 50)
-sources/2 = SubResource("TileSetAtlasSource_f6fy2")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5ie0g"]
 texture = ExtResource("1_47enk")
@@ -104,6 +81,54 @@ texture_region_size = Vector2i(50, 50)
 tile_size = Vector2i(50, 50)
 sources/3 = SubResource("TileSetAtlasSource_ac4p3")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wupxj"]
+texture = ExtResource("1_47enk")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+7:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_iaeo4"]
+tile_size = Vector2i(50, 50)
+sources/4 = SubResource("TileSetAtlasSource_wupxj")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6fy2"]
+texture = ExtResource("1_47enk")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+7:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_kvphj"]
+tile_size = Vector2i(50, 50)
+sources/2 = SubResource("TileSetAtlasSource_f6fy2")
+
 [node name="TileMapGroup" type="Node2D" unique_id=1104058038]
 script = ExtResource("1_jx7lj")
 
@@ -111,11 +136,6 @@ script = ExtResource("1_jx7lj")
 z_index = 1
 tile_set = SubResource("TileSet_f6fy2")
 script = ExtResource("2_jx7lj")
-
-[node name="HoverLayer" type="TileMapLayer" parent="." unique_id=300949944]
-z_index = 4
-tile_set = SubResource("TileSet_kvphj")
-script = ExtResource("4_f6fy2")
 
 [node name="NumberLayer" type="TileMapLayer" parent="." unique_id=841069010]
 z_index = 2
@@ -126,3 +146,13 @@ script = ExtResource("5_kvphj")
 z_index = 3
 tile_set = SubResource("TileSet_wupxj")
 script = ExtResource("6_kvphj")
+
+[node name="FlagLayer" type="TileMapLayer" parent="." unique_id=1869111732]
+z_index = 4
+tile_set = SubResource("TileSet_iaeo4")
+script = ExtResource("7_5ie0g")
+
+[node name="HoverLayer" type="TileMapLayer" parent="." unique_id=300949944]
+z_index = 5
+tile_set = SubResource("TileSet_kvphj")
+script = ExtResource("4_f6fy2")

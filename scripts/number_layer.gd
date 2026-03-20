@@ -1,7 +1,7 @@
 extends TileMapLayer
 
 @onready var tilemapgroup : Node2D = get_parent()
-var tile_id : int = 1 #yerel karo numarası
+var tile_id : int = 1 #yerel karo kaynağı numarası
 
 func _ready() -> void:
 	pass

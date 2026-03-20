@@ -7,8 +7,27 @@ const ROWS : int = 14
 const COLS : int = 15
 const CELL_SIZE : int = 50
 
-#array for mine coordinates
+#mayın koordinatları için dizi
 var mine_coords := []
+
+func _input(event):
+	if event is InputEventMouseButton:
+		#fare pozisyonu ızgara üstünde mi bak
+		if event.position.y < ROWS*CELL_SIZE:
+			var map_pos := local_to_map(event.position)
+			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				pass
+			#bayrak ekleme ve silme
+			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				process_right_click(map_pos)
+				
+func process_right_click(pos):
+	if tilemapgroup.grass_layer.is_grass(pos):
+		if tilemapgroup.flag_layer.is_flag(pos):
+			tilemapgroup.flag_layer.set_cell(pos,-1)
+		else:
+			tilemapgroup.flag_layer.set_cell(pos,tile_id,tilemapgroup.flag_atlas)
+
 
 func generate_mines():
 	for i in range(tilemapgroup.get_parent().TOTAL_MINES):
@@ -47,5 +66,5 @@ func get_all_surrounding_cells(middle_cell):
 	return surrounding_cells
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
