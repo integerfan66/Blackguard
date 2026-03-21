@@ -6,10 +6,14 @@ var tile_id : int = 1 #yerel karo kaynağı numarası
 func _ready() -> void:
 	pass
 
-
-
 func _process(delta: float) -> void:
 	pass
+
+func is_number(pos):
+	for i in tilemapgroup.number_atlas:
+		if get_cell_atlas_coords(pos) == i:
+			return true
+	return false
 
 func generate_numbers():
 	for i in tilemapgroup.board_layer.get_empty_cells():

@@ -79,7 +79,7 @@ texture_region_size = Vector2i(50, 50)
 
 [sub_resource type="TileSet" id="TileSet_wupxj"]
 tile_size = Vector2i(50, 50)
-sources/3 = SubResource("TileSetAtlasSource_ac4p3")
+sources/2 = SubResource("TileSetAtlasSource_ac4p3")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wupxj"]
 texture = ExtResource("1_47enk")
@@ -103,7 +103,7 @@ texture_region_size = Vector2i(50, 50)
 
 [sub_resource type="TileSet" id="TileSet_iaeo4"]
 tile_size = Vector2i(50, 50)
-sources/4 = SubResource("TileSetAtlasSource_wupxj")
+sources/3 = SubResource("TileSetAtlasSource_wupxj")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f6fy2"]
 texture = ExtResource("1_47enk")
@@ -127,7 +127,7 @@ texture_region_size = Vector2i(50, 50)
 
 [sub_resource type="TileSet" id="TileSet_kvphj"]
 tile_size = Vector2i(50, 50)
-sources/2 = SubResource("TileSetAtlasSource_f6fy2")
+sources/4 = SubResource("TileSetAtlasSource_f6fy2")
 
 [node name="TileMapGroup" type="Node2D" unique_id=1104058038]
 script = ExtResource("1_jx7lj")

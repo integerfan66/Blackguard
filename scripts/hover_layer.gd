@@ -1,7 +1,7 @@
 extends TileMapLayer
 
 @onready var tilemapgroup : Node2D = get_parent()
-var tile_id : int = 2 #yerel karo kaynağı numarası
+var tile_id : int = 4 #yerel karo kaynağı numarası
 var last_hovered: Vector2i = Vector2i(-1, -1) #geçersiz nöbetçi değişken
 func highlight_cell():
 	var mouse_pos = local_to_map(get_local_mouse_position())  

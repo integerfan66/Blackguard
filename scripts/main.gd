@@ -1,7 +1,7 @@
 extends Node2D
 
 #oyun değişkenleri
-const TOTAL_MINES : int = 49
+const TOTAL_MINES : int = 50
 
 
 func _ready() -> void:

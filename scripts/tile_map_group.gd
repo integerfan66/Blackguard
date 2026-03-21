@@ -23,6 +23,7 @@ func generate_number_atlas():
 	var a := []
 	for i in range(8):
 		a.append(Vector2i(i,1))
+	print(a)
 	return a
 
 func _ready() -> void:
@@ -41,7 +42,3 @@ func clear():
 	grass_layer.clear()
 	flag_layer.clear()
 	hover_layer.clear()
-
-
-func _process(delta: float) -> void:
-	pass
