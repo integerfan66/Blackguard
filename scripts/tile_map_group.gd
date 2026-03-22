@@ -5,6 +5,10 @@ extends Node2D
 @onready var grass_layer : TileMapLayer = $GrassLayer
 @onready var flag_layer : TileMapLayer = $FlagLayer
 @onready var hover_layer : TileMapLayer = $HoverLayer
+
+signal flag_placed
+signal flag_removed
+
 #var mine_layer : int = 0
 #var number_layer : int = 1
 #var grass_layer : int = 2

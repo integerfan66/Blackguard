@@ -3,12 +3,18 @@
 [ext_resource type="Texture2D" uid="uid://cmwpushsxwpv6" path="res://assets/bg.png" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cevkt370f0a50" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://bxqo0rbix74xp" path="res://scenes/tile_map.tscn" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://dntfndarip4vb" path="res://scenes/hud.tscn" id="4_jyhfs"]
 
-[node name="Node2D" type="Node2D" unique_id=1623841611]
+[node name="Main" type="Node2D" unique_id=1623841611]
 script = ExtResource("1_sugp2")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1378282446]
 position = Vector2(375, 350)
 texture = ExtResource("1_o5qli")
 
-[node name="TileMap" parent="." unique_id=608102383 instance=ExtResource("3_jyhfs")]
+[node name="HUD" parent="." unique_id=1508901408 instance=ExtResource("4_jyhfs")]
+
+[node name="TileMapGroup" parent="." unique_id=1104058038 instance=ExtResource("3_jyhfs")]
+
+[connection signal="flag_placed" from="TileMapGroup" to="." method="_on_tile_map_group_flag_placed"]
+[connection signal="flag_removed" from="TileMapGroup" to="." method="_on_tile_map_group_flag_removed"]

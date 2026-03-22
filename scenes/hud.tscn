@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dntfndarip4vb"]
+
+[ext_resource type="Texture2D" uid="uid://18sp1msep7an" path="res://assets/flag.png" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://dkshhwqtp3o0a" path="res://assets/timer.png" id="2_oo0fn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oo0fn"]
+bg_color = Color(4.6205523e-06, 0.7084944, 0.49613798, 1)
+
+[node name="HUD" type="CanvasLayer" unique_id=1508901408]
+
+[node name="Panel" type="Panel" parent="." unique_id=993799849]
+offset_top = 700.0
+offset_right = 750.0
+offset_bottom = 750.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_oo0fn")
+
+[node name="Flag" type="Sprite2D" parent="." unique_id=549611496]
+position = Vector2(60, 700)
+texture = ExtResource("1_ahhtf")
+offset = Vector2(25, 25)
+
+[node name="MineCount" type="Label" parent="." unique_id=1654186507]
+offset_left = 105.0
+offset_top = 709.0
+offset_right = 145.0
+offset_bottom = 780.0
+theme_override_font_sizes/font_size = 24
+text = "50
+"
+
+[node name="Timer" type="Sprite2D" parent="." unique_id=279072598]
+position = Vector2(600, 700)
+texture = ExtResource("2_oo0fn")
+offset = Vector2(25, 25)
+
+[node name="Stopwatch" type="Label" parent="." unique_id=113609950]
+offset_left = 569.0
+offset_top = 709.0
+offset_right = 610.0
+offset_bottom = 780.0
+theme_override_font_sizes/font_size = 24
+text = "000
+"

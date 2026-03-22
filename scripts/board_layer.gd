@@ -2,6 +2,9 @@ extends TileMapLayer
 
 @onready var tilemapgroup : Node2D = get_parent()
 
+#signal flag_placed
+#signal flag_removed
+
 var tile_id : int = 0
 var flag_tile_id : int = 3
 
@@ -44,8 +47,10 @@ func process_left_click(pos):
 func process_right_click(pos):
 	if tilemapgroup.grass_layer.is_grass(pos):
 		if tilemapgroup.flag_layer.is_flag(pos):
+			tilemapgroup.flag_removed.emit()
 			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,Vector2i(-1,-1))
 		else:
+			tilemapgroup.flag_placed.emit()
 			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,tilemapgroup.flag_atlas)
 
 func generate_mines():
@@ -71,7 +76,7 @@ func reveal_surrounding_cells(cells_to_reveal, revealed_cells):
 	for i in get_all_surrounding_cells(cells_to_reveal[0]):
 		#hücrenin zaten görünmüş olup olmadığına bak
 		if not revealed_cells.has(i):
-			if not cells_to_reveal.has(i):
+			if not cells_to_reveal.has(i) and not tilemapgroup.flag_layer.is_flag(i):
 				cells_to_reveal.append(i)
 	return cells_to_reveal
 
