@@ -11,8 +11,7 @@ func _ready() -> void:
 func new_game():
 	time_elapsed = 0
 	remaining_mines = TOTAL_MINES
-
-
+#ya böyle oyun olmasın bu dil çok kötü ben C++/C#
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	time_elapsed += delta
