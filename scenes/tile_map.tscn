@@ -156,3 +156,5 @@ script = ExtResource("7_5ie0g")
 z_index = 5
 tile_set = SubResource("TileSet_kvphj")
 script = ExtResource("4_f6fy2")
+
+[connection signal="firstClicked" from="BoardLayer" to="." method="_on_board_layer_first_clicked"]

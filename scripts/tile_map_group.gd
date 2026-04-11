@@ -36,8 +36,8 @@ func _ready() -> void:
 func new_game():
 	clear()
 	board_layer.mine_coords.clear()
-	board_layer.generate_mines()
-	number_layer.generate_numbers()
+	#board_layer.generate_mines()
+	#number_layer.generate_numbers()
 	grass_layer.generate_grass()
 
 func clear():
@@ -46,3 +46,8 @@ func clear():
 	grass_layer.clear()
 	flag_layer.clear()
 	hover_layer.clear()
+
+
+func _on_board_layer_first_clicked(safe_cells) -> void:
+	board_layer.generate_mines(safe_cells)
+	number_layer.generate_numbers()

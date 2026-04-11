@@ -1,9 +1,10 @@
 extends TileMapLayer
 
 @onready var tilemapgroup : Node2D = get_parent()
-
+var isFirstClick : bool = true
 #signal flag_placed
 #signal flag_removed
+signal firstClicked(safe_cells)
 
 var tile_id : int = 0
 var flag_tile_id : int = 3
@@ -16,19 +17,41 @@ const CELL_SIZE : int = 50
 var mine_coords := []
 
 func _input(event):
+	
 	if event is InputEventMouseButton:
 		#fare pozisyonu ızgara üstünde mi bak
 		if event.position.y < ROWS*CELL_SIZE:
 			var map_pos := local_to_map(event.position)
-			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not isFirstClick:
 				if not tilemapgroup.flag_layer.is_flag(map_pos):
 					if is_mine(map_pos):
 						print("Game Over")
 					else:
 						process_left_click(map_pos)
+			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed and isFirstClick:
+					var safe_cells = erase_radius(map_pos)
+					isFirstClick = false
+					emit_signal("firstClicked", safe_cells)
+					
+					
+					#ilk tıklamadan sonra tıklanan hücrenin 3x3'lük çevresi açılacak,
+					#mayınlar ve sayılar üretilecek
+					#sonra tıklanan hücre etrafındaki alan kontrol edilecek
+					#boş olan hücreler açılacak.
 			#bayrak ekleme ve silme
-			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and not isFirstClick:
 				process_right_click(map_pos)
+
+func erase_radius(center: Vector2i) -> Array:
+	var safe_cells := []
+	for x in range(-1, 2):  # -1, 0, 1
+		for y in range(-1, 2):
+			var cell = center + Vector2i(x, y)
+			# Bounds check so you don't go off the grid
+			if cell.x >= 0 and cell.x < COLS and cell.y >= 0 and cell.y < ROWS:
+				tilemapgroup.grass_layer.erase_cell(cell)
+				safe_cells.append(cell)
+	return safe_cells
 
 func process_left_click(pos):
 	var revealed_cells := []
@@ -53,10 +76,10 @@ func process_right_click(pos):
 			tilemapgroup.flag_placed.emit()
 			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,tilemapgroup.flag_atlas)
 
-func generate_mines():
+func generate_mines(safe_cells: Array):
 	for i in range(tilemapgroup.get_parent().TOTAL_MINES):
 		var mine_pos = Vector2i(randi_range(0, COLS-1), randi_range(0,ROWS-1))
-		while mine_coords.has(mine_pos):
+		while mine_coords.has(mine_pos) or safe_cells.has(mine_pos):
 			mine_pos = Vector2i(randi_range(0, COLS-1), randi_range(0,ROWS-1))
 		mine_coords.append(mine_pos)
 		#coords, source_id, atlas_coords, alternative_title
