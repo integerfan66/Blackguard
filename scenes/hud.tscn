@@ -107,11 +107,12 @@ text = "0"
 
 [node name="Label" type="Label" parent="DebugMenu/Panel" unique_id=1299261584]
 layout_mode = 0
-offset_left = 278.0
-offset_top = 30.0
-offset_right = 539.0
-offset_bottom = 88.0
+offset_left = 277.0
+offset_top = 27.0
+offset_right = 591.0
+offset_bottom = 102.0
 text = "Tahmin durumunda bırakan kaç
  yer var?"
+autowrap_trim_flags = 0
 
 [connection signal="button_up" from="DebugMenuButton" to="DebugMenu" method="_on_debug_menu_button_up"]
