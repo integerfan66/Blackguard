@@ -29,10 +29,10 @@ func _input(event):
 					else:
 						process_left_click(map_pos)
 			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed and isFirstClick:
-					var safe_cells = erase_radius(map_pos)
-					isFirstClick = false
-					emit_signal("firstClicked", safe_cells)
-					
+				var safe_cells = erase_radius(map_pos)
+				isFirstClick = false
+				emit_signal("firstClicked", safe_cells)
+				process_left_click(map_pos)
 					
 					#ilk tıklamadan sonra tıklanan hücrenin 3x3'lük çevresi açılacak,
 					#mayınlar ve sayılar üretilecek
@@ -84,9 +84,9 @@ func generate_mines(safe_cells: Array):
 		mine_coords.append(mine_pos)
 		#coords, source_id, atlas_coords, alternative_title
 		set_cell(mine_pos,tile_id, tilemapgroup.mine_atlas) #add mine to tilemap
-	
+
 func get_empty_cells():
-	var empty_cells := [] 
+	var empty_cells := []
 	#ızgarada gezin
 	for y in range(ROWS):
 		for x in range(COLS):
@@ -112,7 +112,7 @@ func get_all_surrounding_cells(middle_cell):
 			#ortadaki hücreyse geç
 			if target_cell!=middle_cell:
 				#hücre ızgara üstünde mi bak
-				if (target_cell.x>=0 and target_cell.x <= COLS-1 
+				if (target_cell.x>=0 and target_cell.x <= COLS-1
 					and target_cell.y >=0 and target_cell.y <= ROWS-1):
 					surrounding_cells.append(target_cell)
 	return surrounding_cells
