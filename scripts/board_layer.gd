@@ -77,7 +77,7 @@ func process_right_click(pos):
 			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,tilemapgroup.flag_atlas)
 
 func generate_mines(safe_cells: Array):
-	for i in range(tilemapgroup.get_parent().TOTAL_MINES):
+	for i in range(tilemapgroup.get_parent().get_parent().get_parent().TOTAL_MINES):
 		var mine_pos = Vector2i(randi_range(0, COLS-1), randi_range(0,ROWS-1))
 		while mine_coords.has(mine_pos) or safe_cells.has(mine_pos):
 			mine_pos = Vector2i(randi_range(0, COLS-1), randi_range(0,ROWS-1))

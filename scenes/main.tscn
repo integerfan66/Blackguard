@@ -2,19 +2,65 @@
 
 [ext_resource type="Texture2D" uid="uid://cmwpushsxwpv6" path="res://assets/bg.png" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://cevkt370f0a50" path="res://scripts/main.gd" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://ci0rl8qekso1" path="res://scripts/3DClickTo2D.gd" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bxqo0rbix74xp" path="res://scenes/tile_map.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dntfndarip4vb" path="res://scenes/hud.tscn" id="4_jyhfs"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_jyhfs"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jyhfs"]
+viewport_path = NodePath("Node3D/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbgi4"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_jyhfs")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tefeu"]
+size = Vector3(1, 1, 0.014785767)
 
 [node name="Main" type="Node2D" unique_id=1623841611]
 script = ExtResource("1_sugp2")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1378282446]
-position = Vector2(375, 350)
+[node name="Node3D" type="Node3D" parent="." unique_id=2138537337]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1079188181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0012630522, -0.0011766255, 2.8163195e-05)
+mesh = SubResource("QuadMesh_jyhfs")
+surface_material_override/0 = SubResource("StandardMaterial3D_tbgi4")
+script = ExtResource("2_tbgi4")
+
+[node name="Area3D" type="Area3D" parent="Node3D/MeshInstance3D" unique_id=206653159]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/MeshInstance3D/Area3D" unique_id=808356828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.009298116)
+shape = SubResource("BoxShape3D_tefeu")
+
+[node name="SubViewport" type="SubViewport" parent="Node3D" unique_id=1248104629]
+unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(1024, 1024)
+size_2d_override = Vector2i(213, 0)
+
+[node name="Background" type="Sprite2D" parent="Node3D/SubViewport" unique_id=1378282446]
+position = Vector2(514, 485)
 texture = ExtResource("1_o5qli")
 
-[node name="HUD" parent="." unique_id=1508901408 instance=ExtResource("4_jyhfs")]
+[node name="HUD" parent="Node3D/SubViewport" unique_id=1508901408 instance=ExtResource("4_jyhfs")]
+unique_name_in_owner = true
+follow_viewport_enabled = true
 
-[node name="TileMapGroup" parent="." unique_id=1104058038 instance=ExtResource("3_jyhfs")]
+[node name="TileMapGroup" parent="Node3D/SubViewport" unique_id=1104058038 instance=ExtResource("3_jyhfs")]
+unique_name_in_owner = true
+position = Vector2(27, 30)
 
-[connection signal="flag_placed" from="TileMapGroup" to="." method="_on_tile_map_group_flag_placed"]
-[connection signal="flag_removed" from="TileMapGroup" to="." method="_on_tile_map_group_flag_removed"]
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=741371138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6613517)
+doppler_tracking = 1
+projection = 1
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D" unique_id=579978888]
+
+[connection signal="input_event" from="Node3D/MeshInstance3D/Area3D" to="Node3D/MeshInstance3D" method="_on_area_3d_input_event"]
+[connection signal="flag_placed" from="Node3D/SubViewport/TileMapGroup" to="." method="_on_tile_map_group_flag_placed"]
+[connection signal="flag_removed" from="Node3D/SubViewport/TileMapGroup" to="." method="_on_tile_map_group_flag_removed"]

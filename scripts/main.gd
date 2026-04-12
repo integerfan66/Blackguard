@@ -15,8 +15,8 @@ func new_game():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	time_elapsed += delta
-	$HUD.get_node("Stopwatch").text = str(int(time_elapsed))
-	$HUD.get_node("MineCount").text = str(int(remaining_mines))
+	%HUD.get_node("Stopwatch").text = str(int(time_elapsed))
+	%HUD.get_node("MineCount").text = str(int(remaining_mines))
 
 
 func _on_tile_map_group_flag_placed() -> void:
