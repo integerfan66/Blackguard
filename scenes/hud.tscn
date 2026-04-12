@@ -2,9 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://18sp1msep7an" path="res://assets/flag.png" id="1_ahhtf"]
 [ext_resource type="Texture2D" uid="uid://dkshhwqtp3o0a" path="res://assets/timer.png" id="2_oo0fn"]
+[ext_resource type="Script" uid="uid://boye8wnawte0l" path="res://scenes/debug_menu_button.gd" id="3_6fi6k"]
+[ext_resource type="Script" uid="uid://d2x5rxg1n6hk2" path="res://scenes/debug_menu.gd" id="4_uo2fv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oo0fn"]
 bg_color = Color(4.6205523e-06, 0.7084944, 0.49613798, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ysmq"]
+bg_color = Color(0.30323282, 0.30323282, 0.30323282, 1)
 
 [node name="HUD" type="CanvasLayer" unique_id=1508901408]
 
@@ -42,9 +47,71 @@ theme_override_font_sizes/font_size = 24
 text = "000
 "
 
-[node name="Button" type="Button" parent="." unique_id=161196628]
+[node name="DebugMenuButton" type="Button" parent="." unique_id=161196628]
 offset_left = 331.0
 offset_top = 709.0
 offset_right = 438.0
 offset_bottom = 740.0
 text = "Debug Menu"
+script = ExtResource("3_6fi6k")
+
+[node name="DebugMenu" type="CanvasLayer" parent="." unique_id=394192338]
+visible = false
+script = ExtResource("4_uo2fv")
+
+[node name="Panel" type="Panel" parent="DebugMenu" unique_id=46645069]
+offset_left = 78.0
+offset_top = 166.0
+offset_right = 667.0
+offset_bottom = 597.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ysmq")
+
+[node name="NewBoardResult" type="Label" parent="DebugMenu/Panel" unique_id=532479455]
+layout_mode = 0
+offset_left = 289.0
+offset_top = 274.0
+offset_right = 550.0
+offset_bottom = 320.0
+
+[node name="NewBoard" type="Button" parent="DebugMenu/Panel" unique_id=1494288712]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 263.0
+offset_right = 268.0
+offset_bottom = 335.0
+text = "Yeni Tahta Üret"
+
+[node name="BoardSolver" type="Button" parent="DebugMenu/Panel" unique_id=1779582001]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 143.0
+offset_right = 268.0
+offset_bottom = 215.0
+text = "Tahta Çözücü"
+
+[node name="GuessPointCalculate" type="Button" parent="DebugMenu/Panel" unique_id=1228328146]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 32.0
+offset_right = 268.0
+offset_bottom = 104.0
+text = "Tahmin Puanı Hesaplama"
+
+[node name="GuessPointResult" type="Label" parent="DebugMenu/Panel" unique_id=1801044457]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 83.0
+offset_right = 541.0
+offset_bottom = 129.0
+text = "0"
+
+[node name="Label" type="Label" parent="DebugMenu/Panel" unique_id=1299261584]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 30.0
+offset_right = 539.0
+offset_bottom = 88.0
+text = "Tahmin durumunda bırakan kaç
+ yer var?"
+
+[connection signal="button_up" from="DebugMenuButton" to="DebugMenu" method="_on_debug_menu_button_up"]
