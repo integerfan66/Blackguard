@@ -41,3 +41,10 @@ offset_bottom = 780.0
 theme_override_font_sizes/font_size = 24
 text = "000
 "
+
+[node name="Button" type="Button" parent="." unique_id=161196628]
+offset_left = 331.0
+offset_top = 709.0
+offset_right = 438.0
+offset_bottom = 740.0
+text = "Debug Menu"
