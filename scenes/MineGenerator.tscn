@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://blcqs570r7drs"]
+
+[ext_resource type="Script" uid="uid://e1tfg8m0poys" path="res://scripts/MineGenerator.gd" id="1_0lvfb"]
+
+[node name="MineGenerator" type="Node" unique_id=446350345]
+script = ExtResource("1_0lvfb")

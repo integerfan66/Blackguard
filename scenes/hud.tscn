@@ -99,20 +99,11 @@ text = "Tahmin Puanı Hesaplama"
 
 [node name="GuessPointResult" type="Label" parent="DebugMenu/Panel" unique_id=1801044457]
 layout_mode = 0
-offset_left = 280.0
-offset_top = 83.0
-offset_right = 541.0
-offset_bottom = 129.0
+offset_left = 287.0
+offset_top = 43.0
+offset_right = 548.0
+offset_bottom = 89.0
 text = "0"
 
-[node name="Label" type="Label" parent="DebugMenu/Panel" unique_id=1299261584]
-layout_mode = 0
-offset_left = 277.0
-offset_top = 27.0
-offset_right = 591.0
-offset_bottom = 102.0
-text = "Tahmin durumunda bırakan kaç
- yer var?"
-autowrap_trim_flags = 0
-
 [connection signal="button_up" from="DebugMenuButton" to="DebugMenu" method="_on_debug_menu_button_up"]
+[connection signal="button_up" from="DebugMenu/Panel/NewBoard" to="DebugMenu" method="_on_new_board_button_up"]

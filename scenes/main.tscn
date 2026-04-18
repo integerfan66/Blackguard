@@ -14,7 +14,5 @@ texture = ExtResource("1_o5qli")
 
 [node name="HUD" parent="." unique_id=1508901408 instance=ExtResource("4_jyhfs")]
 
-[node name="TileMapGroup" parent="." unique_id=1104058038 instance=ExtResource("3_jyhfs")]
-
-[connection signal="flag_placed" from="TileMapGroup" to="." method="_on_tile_map_group_flag_placed"]
-[connection signal="flag_removed" from="TileMapGroup" to="." method="_on_tile_map_group_flag_removed"]
+[node name="TileMapGroup" parent="." unique_id=1104058038 node_paths=PackedStringArray("hud_canvas_layer") instance=ExtResource("3_jyhfs")]
+hud_canvas_layer = NodePath("../HUD")

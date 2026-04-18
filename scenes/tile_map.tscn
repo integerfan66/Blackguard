@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://k1rjdhq2h5ya" path="res://scripts/number_layer.gd" id="5_kvphj"]
 [ext_resource type="Script" uid="uid://cs8bdg6sui78e" path="res://scenes/grass_layer.gd" id="6_kvphj"]
 [ext_resource type="Script" uid="uid://bhu14qj6yc6s8" path="res://scenes/flag_layer.gd" id="7_5ie0g"]
+[ext_resource type="PackedScene" path="res://scenes/SolverScene.tscn" id="8_wupxj"]
+[ext_resource type="PackedScene" uid="uid://blcqs570r7drs" path="res://scenes/MineGenerator.tscn" id="9_wupxj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dohrl"]
 texture = ExtResource("1_47enk")
@@ -156,5 +158,9 @@ script = ExtResource("7_5ie0g")
 z_index = 5
 tile_set = SubResource("TileSet_kvphj")
 script = ExtResource("4_f6fy2")
+
+[node name="SolverScene" parent="." unique_id=368484798 instance=ExtResource("8_wupxj")]
+
+[node name="MineGenerator" parent="." unique_id=446350345 instance=ExtResource("9_wupxj")]
 
 [connection signal="firstClicked" from="BoardLayer" to="." method="_on_board_layer_first_clicked"]

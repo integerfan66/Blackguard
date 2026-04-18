@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://df3kkevdarwny" path="res://scripts/SolverScene.gd" id="1_solver"]
+
+[node name="SolverScene" type="Node"]
+script = ExtResource("1_solver")
+use_thread = true
+max_guess_depth = 8

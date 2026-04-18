@@ -1,6 +1,8 @@
 extends TileMapLayer
 
+@onready var mine_generator: MineGenerator = $"../MineGenerator"
 @onready var tilemapgroup : Node2D = get_parent()
+@onready var debugMenu : CanvasLayer = tilemapgroup.hud_canvas_layer.get_node("DebugMenu")
 var isFirstClick : bool = true
 #signal flag_placed
 #signal flag_removed
@@ -8,6 +10,7 @@ signal firstClicked(safe_cells)
 
 var tile_id : int = 0
 var flag_tile_id : int = 3
+var map_pos
 
 const ROWS : int = 14
 const COLS : int = 15
@@ -16,23 +19,46 @@ const CELL_SIZE : int = 50
 #mayın koordinatları için dizi
 var mine_coords := []
 
+func _ready() -> void:
+	mine_generator.generation_completed.connect(_on_mines_ready)
+	mine_generator.generation_failed.connect(_on_generation_failed)
+
+func _on_mines_ready(mines: Array[Vector2i], result: MinesweeperSolver.SolveResult) -> void:
+	# Commit mines to your board_layer, then reveal start cell
+	for m in mines:
+		set_mine(m)
+	tilemapgroup.number_layer.generate_numbers()
+	process_left_click(map_pos)
+	
+	# result.guesses_needed is available here if you want to display it
+
+func set_mine(mine):
+	set_cell(mine,tile_id,tilemapgroup.mine_atlas)
+
+func _on_generation_failed() -> void:
+	push_warning("generation failed.")
+
+
 func _input(event):
 	
 	if event is InputEventMouseButton:
 		#fare pozisyonu ızgara üstünde mi bak
 		if event.position.y < ROWS*CELL_SIZE:
-			var map_pos := local_to_map(event.position)
-			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not isFirstClick:
+			map_pos = local_to_map(event.position)
+			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not isFirstClick and not debugMenu.visible:
 				if not tilemapgroup.flag_layer.is_flag(map_pos):
 					if is_mine(map_pos):
 						print("Game Over")
 					else:
 						process_left_click(map_pos)
-			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed and isFirstClick:
+			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed and isFirstClick and not debugMenu.visible:
 				var safe_cells = erase_radius(map_pos)
 				isFirstClick = false
-				emit_signal("firstClicked", safe_cells)
-				process_left_click(map_pos)
+				#emit_signal("firstClicked", safe_cells)
+				mine_generator.generate(COLS, ROWS, CELL_SIZE, safe_cells)
+				
+				
+				
 					
 					#ilk tıklamadan sonra tıklanan hücrenin 3x3'lük çevresi açılacak,
 					#mayınlar ve sayılar üretilecek
@@ -42,8 +68,8 @@ func _input(event):
 			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and not isFirstClick:
 				process_right_click(map_pos)
 
-func erase_radius(center: Vector2i) -> Array:
-	var safe_cells := []
+func erase_radius(center: Vector2i) -> Array[Vector2i]:
+	var safe_cells : Array[Vector2i]= []
 	for x in range(-1, 2):  # -1, 0, 1
 		for y in range(-1, 2):
 			var cell = center + Vector2i(x, y)
@@ -70,10 +96,8 @@ func process_left_click(pos):
 func process_right_click(pos):
 	if tilemapgroup.grass_layer.is_grass(pos):
 		if tilemapgroup.flag_layer.is_flag(pos):
-			tilemapgroup.flag_removed.emit()
 			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,Vector2i(-1,-1))
 		else:
-			tilemapgroup.flag_placed.emit()
 			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,tilemapgroup.flag_atlas)
 
 func generate_mines(safe_cells: Array):

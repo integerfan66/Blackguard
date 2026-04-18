@@ -1,5 +1,5 @@
 extends CanvasLayer
-
+@onready var guessPointResult : Label = $Panel/GuessPointResult
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,10 +10,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func _set_text(t):
+	guessPointResult.text = t
 
 func _on_debug_menu_button_up() -> void:
 	if visible:
 		visible = false
 	else:
 		visible = true
-	
+
+
+func _on_new_board_button_up() -> void:
+	get_tree().reload_current_scene()
