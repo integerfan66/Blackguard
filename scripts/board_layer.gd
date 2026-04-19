@@ -15,7 +15,7 @@ var map_pos
 
 const ROWS : int = 14
 const COLS : int = 15
-const MINE_COUNT : int = 45
+const MINE_COUNT : int = 35 
 const CELL_SIZE : int = 50
 
 #mayın koordinatları için dizi
