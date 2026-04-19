@@ -162,5 +162,6 @@ script = ExtResource("4_f6fy2")
 [node name="SolverScene" parent="." unique_id=368484798 instance=ExtResource("8_wupxj")]
 
 [node name="MineGenerator" parent="." unique_id=446350345 instance=ExtResource("9_wupxj")]
+max_attempts = 250
 
-[connection signal="firstClicked" from="BoardLayer" to="." method="_on_board_layer_first_clicked"]
+[connection signal="minesReady" from="BoardLayer" to="." method="_on_board_layer_mines_ready"]

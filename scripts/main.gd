@@ -4,19 +4,22 @@ extends Node2D
 const TOTAL_MINES : int = 50
 var remaining_mines : int
 var time_elapsed : float
+var isStarted : bool = false
 
 func _ready() -> void:
-	new_game()
+	pass
 
 func new_game():
+	isStarted = true
 	time_elapsed = 0
 	remaining_mines = TOTAL_MINES
 #ya böyle oyun olmasın bu dil çok kötü ben C++/C#
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	time_elapsed += delta
-	$HUD.get_node("Stopwatch").text = str(int(time_elapsed))
-	$HUD.get_node("MineCount").text = str(int(remaining_mines))
+	if isStarted:
+		time_elapsed += delta
+		$HUD.get_node("Stopwatch").text = str(int(time_elapsed))
+		$HUD.get_node("MineCount").text = str(int(remaining_mines))
 
 
 func _on_tile_map_group_flag_placed() -> void:

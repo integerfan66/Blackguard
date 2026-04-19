@@ -6,7 +6,8 @@ extends TileMapLayer
 var isFirstClick : bool = true
 #signal flag_placed
 #signal flag_removed
-signal firstClicked(safe_cells)
+#signal firstClicked(safe_cells)
+signal minesReady
 
 var tile_id : int = 0
 var flag_tile_id : int = 3
@@ -29,6 +30,8 @@ func _on_mines_ready(mines: Array[Vector2i], result: MinesweeperSolver.SolveResu
 		set_mine(m)
 	tilemapgroup.number_layer.generate_numbers()
 	process_left_click(map_pos)
+	minesReady.emit()
+	
 	
 	# result.guesses_needed is available here if you want to display it
 

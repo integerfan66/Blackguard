@@ -9,6 +9,7 @@ extends Node2D
 @onready var solver_scene: SolverScene = $SolverScene   # add as child node
 @onready var result_label: Label = hud_canvas_layer.get_node("DebugMenu/Panel/GuessPointResult")
 
+signal minesReady
 
 #var mine_layer : int = 0
 #var number_layer : int = 1
@@ -89,3 +90,7 @@ func _on_board_layer_first_clicked(safe_cells) -> void:
 #func _highlight_cell(pos: Vector2i, color: Color) -> void:
 	## Replace with however you draw/mark cells in your game
 	#pass
+
+
+func _on_board_layer_mines_ready() -> void:
+	minesReady.emit()

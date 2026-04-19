@@ -16,3 +16,5 @@ texture = ExtResource("1_o5qli")
 
 [node name="TileMapGroup" parent="." unique_id=1104058038 node_paths=PackedStringArray("hud_canvas_layer") instance=ExtResource("3_jyhfs")]
 hud_canvas_layer = NodePath("../HUD")
+
+[connection signal="minesReady" from="TileMapGroup" to="." method="new_game"]
