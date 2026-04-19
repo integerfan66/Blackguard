@@ -15,6 +15,7 @@ var map_pos
 
 const ROWS : int = 14
 const COLS : int = 15
+const MINE_COUNT : int = 45
 const CELL_SIZE : int = 50
 
 #mayın koordinatları için dizi
@@ -58,7 +59,7 @@ func _input(event):
 				var safe_cells = erase_radius(map_pos)
 				isFirstClick = false
 				#emit_signal("firstClicked", safe_cells)
-				mine_generator.generate(COLS, ROWS, CELL_SIZE, safe_cells)
+				mine_generator.generate(COLS, ROWS, MINE_COUNT, safe_cells)
 				
 				
 				
