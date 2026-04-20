@@ -24,7 +24,7 @@ script = ExtResource("1_sugp2")
 [node name="Node3D" type="Node3D" parent="." unique_id=2138537337]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1079188181]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0012630522, -0.0011766255, 2.8163195e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001, 0)
 mesh = SubResource("QuadMesh_jyhfs")
 surface_material_override/0 = SubResource("StandardMaterial3D_tbgi4")
 script = ExtResource("2_tbgi4")
@@ -32,29 +32,26 @@ script = ExtResource("2_tbgi4")
 [node name="Area3D" type="Area3D" parent="Node3D/MeshInstance3D" unique_id=206653159]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/MeshInstance3D/Area3D" unique_id=808356828]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.009298116)
 shape = SubResource("BoxShape3D_tefeu")
 
 [node name="SubViewport" type="SubViewport" parent="Node3D" unique_id=1248104629]
 unique_name_in_owner = true
 transparent_bg = true
-size = Vector2i(1024, 1024)
-size_2d_override = Vector2i(213, 0)
+size = Vector2i(750, 750)
 
-[node name="Background" type="Sprite2D" parent="Node3D/SubViewport" unique_id=1378282446]
-position = Vector2(514, 485)
-texture = ExtResource("1_o5qli")
+[node name="TileMapGroup" parent="Node3D/SubViewport" unique_id=1104058038 instance=ExtResource("3_jyhfs")]
+unique_name_in_owner = true
 
 [node name="HUD" parent="Node3D/SubViewport" unique_id=1508901408 instance=ExtResource("4_jyhfs")]
 unique_name_in_owner = true
 follow_viewport_enabled = true
 
-[node name="TileMapGroup" parent="Node3D/SubViewport" unique_id=1104058038 instance=ExtResource("3_jyhfs")]
-unique_name_in_owner = true
-position = Vector2(27, 30)
+[node name="Background" type="Sprite2D" parent="Node3D/SubViewport" unique_id=1378282446]
+position = Vector2(375, 350)
+texture = ExtResource("1_o5qli")
 
 [node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=741371138]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6613517)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 doppler_tracking = 1
 projection = 1
 current = true
