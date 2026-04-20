@@ -1,5 +1,5 @@
 extends TileMapLayer
-
+class_name BoardLayer
 @onready var tilemapgroup : Node2D = get_parent()
 var isFirstClick : bool = true
 #signal flag_placed
