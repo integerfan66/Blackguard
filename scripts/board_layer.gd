@@ -3,6 +3,9 @@ extends TileMapLayer
 @onready var mine_generator: MineGenerator = $"../MineGenerator"
 @onready var tilemapgroup : Node2D = get_parent()
 @onready var debugMenu : CanvasLayer = tilemapgroup.hud_canvas_layer.get_node("DebugMenu")
+var loseScreen : Panel
+
+
 var isFirstClick : bool = true
 signal flag_placed
 signal flag_removed
@@ -25,6 +28,8 @@ var unflagged_mine_count : int = MINE_COUNT
 func _ready() -> void:
 	mine_generator.generation_completed.connect(_on_mines_ready)
 	mine_generator.generation_failed.connect(_on_generation_failed)
+	loseScreen = tilemapgroup.hud_canvas_layer.get_node("WinLoseScreen").get_node("LoseScreen")
+	
 
 func _on_mines_ready(mines: Array[Vector2i], result: MinesweeperSolver.SolveResult) -> void:
 	# Commit mines to your board_layer, then reveal start cell
@@ -53,7 +58,7 @@ func _input(event):
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not isFirstClick and not debugMenu.visible:
 				if not tilemapgroup.flag_layer.is_flag(map_pos):
 					if is_mine(map_pos):
-						print("Game Over")
+						loseScreen.visible = true
 					else:
 						process_left_click(map_pos)
 			elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed and isFirstClick and not debugMenu.visible:

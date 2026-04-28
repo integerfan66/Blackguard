@@ -111,12 +111,56 @@ text = "0"
 [node name="WinLoseScreen" type="CanvasLayer" parent="." unique_id=681426131]
 
 [node name="WinScreen" type="Panel" parent="WinLoseScreen" unique_id=1604461783]
-offset_right = 40.0
-offset_bottom = 40.0
+visible = false
+offset_right = 750.0
+offset_bottom = 700.0
+
+[node name="NewBoard" type="Button" parent="WinLoseScreen/WinScreen" unique_id=1757234437]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 318.0
+offset_right = 498.0
+offset_bottom = 397.0
+theme_override_font_sizes/font_size = 24
+text = "Yeni Oyun"
+
+[node name="Label" type="Label" parent="WinLoseScreen/WinScreen" unique_id=766756124]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 222.0
+offset_right = 471.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 25
+text = "Kazandın!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LoseScreen" type="Panel" parent="WinLoseScreen" unique_id=55971456]
-offset_right = 40.0
-offset_bottom = 40.0
+visible = false
+offset_right = 750.0
+offset_bottom = 700.0
+
+[node name="NewBoard" type="Button" parent="WinLoseScreen/LoseScreen" unique_id=759982275]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 318.0
+offset_right = 498.0
+offset_bottom = 397.0
+theme_override_font_sizes/font_size = 24
+text = "Yeni Oyun"
+
+[node name="Label" type="Label" parent="WinLoseScreen/LoseScreen" unique_id=208620914]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 222.0
+offset_right = 471.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 25
+text = "Kaybettin!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="button_up" from="MenuBar/DebugMenuButton" to="DebugMenu" method="_on_debug_menu_button_up"]
 [connection signal="button_up" from="DebugMenu/Panel/NewBoard" to="DebugMenu" method="_on_new_board_button_up"]
+[connection signal="button_up" from="WinLoseScreen/WinScreen/NewBoard" to="DebugMenu" method="_on_new_board_button_up"]
+[connection signal="button_up" from="WinLoseScreen/LoseScreen/NewBoard" to="DebugMenu" method="_on_new_board_button_up"]
