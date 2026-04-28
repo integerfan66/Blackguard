@@ -10,7 +10,8 @@ extends Node2D
 @onready var result_label: Label = hud_canvas_layer.get_node("DebugMenu/Panel/GuessPointResult")
 
 signal minesReady
-
+signal flag_placed
+signal flag_removed
 #var mine_layer : int = 0
 #var number_layer : int = 1
 #var grass_layer : int = 2
@@ -48,6 +49,8 @@ func clear():
 	grass_layer.clear()
 	flag_layer.clear()
 	hover_layer.clear()
+
+
 
 
 func _on_board_layer_first_clicked(safe_cells) -> void:
@@ -94,3 +97,11 @@ func _on_board_layer_first_clicked(safe_cells) -> void:
 
 func _on_board_layer_mines_ready() -> void:
 	minesReady.emit()
+
+
+func _on_board_layer_flag_removed() -> void:
+	flag_removed.emit()
+
+
+func _on_board_layer_flag_placed() -> void:
+	flag_placed.emit()

@@ -164,4 +164,6 @@ script = ExtResource("4_f6fy2")
 [node name="MineGenerator" parent="." unique_id=446350345 instance=ExtResource("9_wupxj")]
 max_attempts = 250
 
+[connection signal="flag_placed" from="BoardLayer" to="." method="_on_board_layer_flag_placed"]
+[connection signal="flag_removed" from="BoardLayer" to="." method="_on_board_layer_flag_removed"]
 [connection signal="minesReady" from="BoardLayer" to="." method="_on_board_layer_mines_ready"]

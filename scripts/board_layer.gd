@@ -4,8 +4,8 @@ extends TileMapLayer
 @onready var tilemapgroup : Node2D = get_parent()
 @onready var debugMenu : CanvasLayer = tilemapgroup.hud_canvas_layer.get_node("DebugMenu")
 var isFirstClick : bool = true
-#signal flag_placed
-#signal flag_removed
+signal flag_placed
+signal flag_removed
 #signal firstClicked(safe_cells)
 signal minesReady
 
@@ -20,6 +20,7 @@ const CELL_SIZE : int = 50
 
 #mayın koordinatları için dizi
 var mine_coords := []
+var unflagged_mine_count : int = MINE_COUNT
 
 func _ready() -> void:
 	mine_generator.generation_completed.connect(_on_mines_ready)
@@ -60,14 +61,6 @@ func _input(event):
 				isFirstClick = false
 				#emit_signal("firstClicked", safe_cells)
 				mine_generator.generate(COLS, ROWS, MINE_COUNT, safe_cells)
-				
-				
-				
-					
-					#ilk tıklamadan sonra tıklanan hücrenin 3x3'lük çevresi açılacak,
-					#mayınlar ve sayılar üretilecek
-					#sonra tıklanan hücre etrafındaki alan kontrol edilecek
-					#boş olan hücreler açılacak.
 			#bayrak ekleme ve silme
 			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and not isFirstClick:
 				process_right_click(map_pos)
@@ -99,10 +92,20 @@ func process_left_click(pos):
 #bayrak dikme/kaldırma
 func process_right_click(pos):
 	if tilemapgroup.grass_layer.is_grass(pos):
-		if tilemapgroup.flag_layer.is_flag(pos):
+		if is_mine(pos) and tilemapgroup.flag_layer.is_flag(pos):
 			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,Vector2i(-1,-1))
-		else:
+			unflagged_mine_count+=1
+			flag_removed.emit()
+		elif is_mine(pos) and not tilemapgroup.flag_layer.is_flag(pos):
 			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,tilemapgroup.flag_atlas)
+			unflagged_mine_count-=1
+			flag_placed.emit()
+		elif not is_mine(pos) and not tilemapgroup.flag_layer.is_flag(pos):
+			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,tilemapgroup.flag_atlas)
+			flag_placed.emit()
+		else:
+			tilemapgroup.flag_layer.set_cell(pos,flag_tile_id,Vector2i(-1,-1))
+			flag_removed.emit()
 
 func generate_mines(safe_cells: Array):
 	for i in range(tilemapgroup.get_parent().TOTAL_MINES):
