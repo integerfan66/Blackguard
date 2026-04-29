@@ -3,7 +3,7 @@ extends CanvasLayer
 
 @onready var guessPointResult : Label = $Panel/GuessPointResult
 var isPaused : bool = true
-
+@onready var Main : Node2D = $"../../../Main"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,12 +18,12 @@ func _set_text(t):
 	guessPointResult.text = t
 
 func _on_debug_menu_button_up() -> void:
-	if visible and isPaused:
-		visible = false
-		isPaused = false
-	else:
+	if not visible and not isPaused and Main.isStarted :
 		visible = true
 		isPaused = true
+	else:
+		visible = false
+		isPaused = false
 
 
 func _on_new_board_button_up() -> void:

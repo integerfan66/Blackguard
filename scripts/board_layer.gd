@@ -23,7 +23,9 @@ const CELL_SIZE : int = 50
 
 #mayın koordinatları için dizi
 var mine_coords := []
+var revealed_cells := []
 var unflagged_mine_count : int = MINE_COUNT
+var empty_cell_count : int = 0 
 
 func _ready() -> void:
 	mine_generator.generation_completed.connect(_on_mines_ready)
@@ -82,13 +84,16 @@ func erase_radius(center: Vector2i) -> Array[Vector2i]:
 	return safe_cells
 
 func process_left_click(pos):
-	var revealed_cells := []
+	
 	var cells_to_reveal := [pos]
 	
 	while not cells_to_reveal.is_empty():
 		#hücreyi temizle ve temiz olduğunu belirt
 		tilemapgroup.grass_layer.erase_cell(cells_to_reveal[0])
-		revealed_cells.append(cells_to_reveal[0])
+		if not revealed_cells.has(cells_to_reveal[0]):
+			revealed_cells.append(cells_to_reveal[0])
+			print(empty_cell_count)
+			empty_cell_count+=1
 		if not tilemapgroup.number_layer.is_number(cells_to_reveal[0]):
 				cells_to_reveal= reveal_surrounding_cells(cells_to_reveal,revealed_cells)
 		#temizlenmiş hücreyi diziden kaldır
